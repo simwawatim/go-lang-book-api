@@ -1,7 +1,7 @@
 -include .env
 export
 
-DOCKERHUB_USER ?= YOUR_DOCKERHUB_USER
+DOCKERHUB_USER ?= simwawa
 IMAGE ?= $(DOCKERHUB_USER)/book-api
 TAG ?= $(shell git rev-parse --short HEAD 2>/dev/null || echo dev)
 

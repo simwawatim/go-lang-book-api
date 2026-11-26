@@ -9,5 +9,5 @@ resources:
   - service.yaml
 images:
   - name: book-api
-    newName: docker.io/YOUR_DOCKERHUB_USER/book-api
+    newName: docker.io/simwawa/book-api
     newTag: latest
