@@ -1,0 +1,12 @@
+.git
+.gitignore
+.env
+.env.*
+bin/
+media/
+k8s/
+argocd/
+docker-compose.yml
+Makefile
+README.md
+*.md

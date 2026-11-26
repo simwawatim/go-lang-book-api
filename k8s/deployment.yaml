@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: book-api
+  labels:
+    app: book-api
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: book-api
+  template:
+    metadata:
+      labels:
+        app: book-api
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 10001
+      containers:
+        - name: book-api
+          image: book-api
+          ports:
+            - name: http
+              containerPort: 8743
+          envFrom:
+            - secretRef:
+                name: book-api-secrets
+          env:
+            - name: PORT
+              value: "8743"
+            - name: RUN_MIGRATIONS
+              value: "false"
+            - name: CORS_ORIGIN
+              value: https://your-frontend.example.com
+          readinessProbe:
+            httpGet:
+              path: /readyz
+              port: http
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+            periodSeconds: 20
+          resources:
+            requests:
+              cpu: 50m
+              memory: 32Mi
+            limits:
+              memory: 128Mi
