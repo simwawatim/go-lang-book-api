@@ -10,4 +10,4 @@ resources:
 images:
   - name: book-api
     newName: docker.io/simwawa/book-api
-    newTag: latest
+    newTag: initial
